@@ -8,6 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@next-auth/prisma-adapter": "^1.0.5",
     "@sidebase/nuxt-auth": "^0.1.2",
     "nuxt": "3.0.0-rc.13",
     "prisma": "^4.6.1"
