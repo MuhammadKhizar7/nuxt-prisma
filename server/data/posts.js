@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from './prisma'
 
 export async function getPosts() {
   const posts = await prisma.post.findMany({
@@ -27,13 +26,17 @@ export async function getPost(id) {
   return post
 }
 
-export async function createPost({ title, content }) {
-  const result = await prisma.post.create({
-    data: {
-      title: title,
-      content: content,
-      authorId: '1',
-    },
-  })
+export async function createPost(title, content, email) {
+  let result = null
+  if (email) {
+    result = await prisma.post.create({
+      data: {
+        title: title,
+        content: content,
+        author: { connect: { email: email } },
+        published: true,
+      },
+    })
+  }
   return result
 }
